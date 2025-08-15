@@ -1,0 +1,142 @@
+# Hackathon Dev Guide — 5-Minute Quick Start
+
+> Introduction to the APUS AI Inference Service for the AO Hackathon
+
+## Introduction
+
+Hello builders, and welcome to the AO Hackathon!
+
+At APUS, our mission is to enable verifiable decentralized AI of the AO ecosystem by integrating deterministic GPU computing. We believe that by providing direct, on-chain access to accelerated computing, we unlock the next generation of autonomous agents—making them more intelligent, capable, and powerful than ever before.
+
+For this hackathon, we are thrilled to introduce our flagship product: the **APUS AI Inference Service**. This service gives your AO processes the ability to call a large language model and receive a response, all through a simple, on-chain message. Inspired by the simplicity and elegance of community projects like `llama-herder` [https://github.com/permaweb/llama-herder](https://github.com/permaweb/llama-herder), our service is designed to be incredibly easy to use, so you can focus on building amazing things.
+
+This guide will walk you through everything from making your first AI call to integrating our service into a full-stack dApp. Let's get started!
+
+## Quick Start In 5 Minutes
+
+1. **Install aos**
+
+   ```jsx
+   npm i -g https://preview_ao.arweave.net
+   ```
+
+2. **Spawn your process & trust APUS HyperBEAM Node**
+   1. Open your terminal
+
+   2. Spawn your process:
+
+      ```jsx
+      aos my_process
+      ```
+
+   3. Trust apus node operator:
+
+      ```jsx
+      ao.authorities[2] = "lpJ5Edz_8DbNnVDL0XdbsY9vCOs45NACzfI4jvo4Ba8"
+      ```
+
+3. Install APM & APUS Lua Lib
+   1. Install APM:
+
+      ```jsx
+      .load-blueprint apm
+      ```
+
+   2. Wait for APM Loaded (about 2 minutes)
+
+      ![image.png](https://mintlify.s3.us-west-1.amazonaws.com/apusnetwork/sdk/images/image.png)
+
+      *Note: Please wait for the `APM client loaded` logs to load. If it do not appear after a long time, try entering any command in the AOS console to check if the system is stuck.*
+   <Expandable title="Advanced use when install apm failed or taking too long">
+     * ctrl+c quit aos console
+     * touch installer.lua
+     * copy [https://github.com/betteridea-dev/ao-package-manager/blob/main/installer.lua](https://github.com/betteridea-dev/ao-package-manager/blob/main/installer.lua) into installer.lua
+
+     ```jsx
+     Warning: do not use the previous process and do not use load-blueprint apm
+     ```
+
+     * aos new\_process
+     * .load installer.lua
+     * now install apus sdk : apm.install "@apus/ai"
+   </Expandable>
+   3. Install Lua Lib:
+
+      ```jsx
+      apm.install "@apus/ai"
+      ```
+
+   4. Wait for Lua Lib Installed
+
+      ![image.png](https://mintlify.s3.us-west-1.amazonaws.com/apusnetwork/sdk/images/image1.png)
+
+      *Note: Download may take a while. Please wait.*
+
+4. Get your credits
+   1. You have 5 default test credits, allowing up to 5 inference calls.
+   2. Apply more credits:(Recommend)
+      1. Join APUS Discord: <a href="https://discord.gg/r3aQcJRH5A" target="_blank">[https://discord.gg/r3aQcJRH5A](https://discord.gg/r3aQcJRH5A)</a>
+      2. Go to the `#📥｜apus-hackathon-agent` channel.
+      3. Submit Your Application :
+
+         **🧪 Sample Application Format**
+
+         ```jsx
+         Project Name: MyChatAgent
+         Description: A Chat AI Agent built using the APUS SDK
+         GitHub Repo: <https://github.com/xxx/xxx>
+         Twitter Handle:xxxx
+         Process ID: process_3rrphxxxxxx
+         Wallet Address: abc123…
+         Application Type: Plan A (Free Credits) / Plan B (Token Rebate)
+         ```
+
+5. Reconnect your process to APUS HyperBEAM Node & Run AI Inference
+
+   1. Reconnect your process to APUS HyperBEAM Node
+      ```jsx
+      aos my_process --mainnet http://72.46.85.207:8734
+      ```
+
+   2. Load AI Lib
+
+      ```lua
+      ApusAI = require('@apus/ai')
+      ```
+
+   3. Set `ApusAI_Debug` to enable inference result logging. If unset, no logs will be shown.
+
+      ```jsx
+      ApusAI_Debug = true
+      ```
+
+   Check your balance
+
+   > **Default balance: 5,000,000,000,000 units (equals 5 credits for 5 inference calls). Credits are non-transferable.**
+
+   ```lua
+   ApusAI.getBalance()
+   ```
+
+   1. Run AI Inference: *it takes about 50s*
+
+      ```lua
+      ApusAI.infer("What is Arweave?")
+      ```
+
+   2. Wait for AI Response
+
+      ![image.png](https://mintlify.s3.us-west-1.amazonaws.com/apusnetwork/sdk/images/image2.png)
+
+## 🚀 Next Step: View Complete Project Example
+
+Congratulations! You have successfully run your first AI inference call. Now you can view our complete project example to learn how to build real AI applications:
+
+**[📖 View Complete Project Example →](/sdk/showcase)**
+
+This example project will demonstrate:
+
+* How to deploy AI chat agents on the AO network
+* How to integrate APUS AI inference services
+* How to build frontend interfaces to interact with AO agents
+* Complete developer guides and best practices
